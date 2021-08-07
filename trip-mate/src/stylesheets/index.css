@@ -46,7 +46,7 @@ h3 {
       width: 60%;
       margin: 0 auto;
       display: grid;
-      grid-template-areas: 'total total total' 'tropic trek club' 'goal goal goal';
+      grid-template-areas: 'total total total' 'tropic trek club' 'goal goal goal';
       grid-row-gap: 5em;
       text-align: center; }
       .route-container .trips-count .content .total {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const AddTrip = ({newTrip}) => {
+export const AddTrip = ({newTrip,addTripMessage,showMessage}) => {
     let date, place, type;
     const submit = (e) => {
         e.preventDefault();
@@ -10,8 +10,10 @@ export const AddTrip = ({newTrip}) => {
             type : type.value,
         });
         date.value = place.value = type.value = '';
-    }
+        addTripMessage()
 
+    }
+    const message = showMessage ? "Trip Added Successfully !" : ' '
     return (
         <div className="form-container">
             <form onSubmit={submit} className="form black-container">
@@ -20,6 +22,7 @@ export const AddTrip = ({newTrip}) => {
                     <br />
                     <br />
                     <br />
+                    <p>{message}</p>
                 </label>
                 <label>
                     Date: <br/>

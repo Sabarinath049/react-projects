@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Trip } from './Trip';
 
-export const TripsList = ({match, days}) => { 
+export const TripsList = ({match, days, onStatusChange}) => { 
     const filter = match.params.filter;
     const trips = filter ? days.filter( trip => trip.type === filter) : days;
     return (
@@ -14,6 +14,7 @@ export const TripsList = ({match, days}) => {
                         <th>Date</th>
                         <th>Place</th>
                         <th>Type</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,7 @@ export const TripsList = ({match, days}) => {
                             <Trip
                                 key={i}
                                 {...trip}
+                                onStatusChange={onStatusChange}
                             />
                         )
                     }
@@ -44,6 +46,10 @@ export const TripsList = ({match, days}) => {
                 <Link to="/list/Tropic">
                     Tropics
 				</Link>
+                &#9679;
+                <Link to="/list/pending">Pending</Link>
+                &#9679;
+                <Link to="/list/completed">completed</Link>
             </div>            
         </div>
     )

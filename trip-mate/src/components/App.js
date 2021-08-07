@@ -16,19 +16,23 @@ export class App extends React.Component {
                 {
                     place: "Manali",
                     date: "2017-01-01",
-                    type: "Trek"
+                    type: "Trek",
+                    status: "Pending"
                 },
                 {
                     place: "Mumbai",
                     date: "2017-04-05",
-                    type: "Club"
+                    type: "Club",
+                    status: "Pending"
                 },
                 {
                     place: "Marina",
                     date: "2017-02-09",
-                    type: "Tropic"
+                    type: "Tropic",
+                    status: "Pending"
                 }
-            ]
+            ],
+            addTripMessage: false
         }
         this.addTrip = this.addTrip.bind(this);
     }
@@ -39,9 +43,17 @@ export class App extends React.Component {
                 allTrips: [
                 ...prevState.allTrips,
                 newTrip
-                ]
+                ],
             }
         });
+    }
+
+    addTripMessage=()=>{
+        this.setState((prevState)=>({addTripMessage: !prevState.addTripMessage}))
+    }
+
+    onStatusChange = changedStatus => {
+        this.setState({status: changedStatus})
     }
 
     countDays(filter) {
@@ -51,6 +63,7 @@ export class App extends React.Component {
 
     // Switch goes to first matching route
     render () {
+        const {addTripMessage} = this.state
         return (
             <div className="app">                
                 <Router>
@@ -77,12 +90,15 @@ export class App extends React.Component {
                                 <TripsList
                                     {...props}
                                     days={this.state.allTrips}
+                                    onStatusChange={this.onStatusChange}
                                 />
                             )} />
                             <Route path="/add" render={(props) => (
                                 <AddTrip
                                     {...props}
                                     newTrip={this.addTrip}
+                                    addTripMessage={this.addTripMessage}
+                                    showMessage={addTripMessage}
                                 />
                             )} />
                             <Route component={Error404} />

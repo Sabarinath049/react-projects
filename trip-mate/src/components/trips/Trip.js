@@ -1,6 +1,10 @@
 import React from 'react';
 
-export const Trip = ({date, place, type}) => (
+export const Trip = ({date, place, type, onStatusChange}) => {
+    const changeStatus=(event)=>{
+        onStatusChange(event.target.value)
+    }
+    return(
     <tr>
         <td>
             {date}
@@ -11,5 +15,16 @@ export const Trip = ({date, place, type}) => (
         <td>
             {type}
         </td>
-    </tr>	
-)
+        <td>
+            <select onChange={changeStatus}>
+                <option value="Pending">
+                    Pending
+                </option>
+                <option value="Completed">
+                    Completed
+                </option>
+            </select>
+        </td>
+    </tr>
+    )	
+}
